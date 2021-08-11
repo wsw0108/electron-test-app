@@ -31,8 +31,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-linux-{{ checksum "yarn.lock" }}
-          key: dependency-cache-linux-
+          keys:
+            - dependency-cache-linux-{{ checksum "yarn.lock" }}
+            - dependency-cache-linux-
       - run:
           name: Install Dependencies
           command: yarn install
@@ -52,8 +53,9 @@ jobs:
       - *windows_install_node
       - *windows_install_yarn
       - restore_cache:
-          key: dependency-cache-windows-{{ checksum "yarn.lock" }}
-          key: dependency-cache-windows-
+          keys:
+            - dependency-cache-windows-{{ checksum "yarn.lock" }}
+            - dependency-cache-windows-
       - run:
           name: Install Dependencies
           command: yarn install
