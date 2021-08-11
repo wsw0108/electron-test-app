@@ -1,0 +1,55 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@2.4.0
+
+linux: &linux
+  docker:
+    - image: cimg/node:lts-browsers
+
+windows: &windows
+  executor:
+    name: windows/default
+    shell: powershell.exe
+
+windows_install_node: &windows_install_node
+  run:
+    name: Install NodeJS 14.x
+    command: |
+      nvm install 14.17.4
+      nvm use 14.17.4 --default
+
+jobs:
+  linux_test:
+    <<: *linux
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-linux-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-linux-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run tests
+          command: yarn test
+  windows_test:
+    <<: *windows
+    steps:
+      - checkout
+      - *windows_install_node
+      - restore_cache:
+          key: dependency-cache-windows-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-windows-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run tests
+          command: yarn test
