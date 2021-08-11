@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: "14.x"
+  nodejs_version: "14.17.4"
 
 platform:
   - x64
