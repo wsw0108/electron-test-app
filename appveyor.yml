@@ -1,0 +1,17 @@
+environment:
+  nodejs_version: "14.x"
+
+install:
+  - node -v
+  - npm -v
+  - npm install -g yarn
+  - yarn install
+
+cache:
+  - node_modules -> yarn.lock
+
+test_script:
+  - yarn test
+  - yarn run mocha
+
+build: off
