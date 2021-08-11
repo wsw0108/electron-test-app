@@ -5,7 +5,7 @@ platform:
   - x64
 
 install:
-  - ps: Install-Product node $env:nodejs_version $env:platform
+  - ps: Update-NodeJsInstallation $env:nodejs_version $env:platform
   - node -v
   - npm -v
   - npm install -g yarn
