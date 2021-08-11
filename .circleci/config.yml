@@ -19,6 +19,12 @@ windows_install_node: &windows_install_node
       nvm install 14.17.4
       nvm use 14.17.4 --default
 
+windows_install_yarn: &windows_install_yarn
+  run:
+    name: Install Yarn
+    command: |
+      npm install -g yarn
+
 jobs:
   linux_test:
     <<: *linux
@@ -41,6 +47,7 @@ jobs:
     steps:
       - checkout
       - *windows_install_node
+      - *windows_install_yarn
       - restore_cache:
           key: dependency-cache-windows-{{ checksum "yarn.lock" }}
       - run:
