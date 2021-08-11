@@ -1,8 +1,11 @@
 environment:
   nodejs_version: "14.x"
 
+platform:
+  - x64
+
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version $env:platform
   - node -v
   - npm -v
   - npm install -g yarn
