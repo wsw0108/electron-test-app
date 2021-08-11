@@ -10,7 +10,8 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
-    "test": "jest"
+    "test": "jest",
+    "mocha": "mocha"
   },
   "keywords": [],
   "author": {
@@ -56,6 +57,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.59",
     "electron": "13.1.9",
     "jest": "^27.0.6",
+    "mocha": "^9.0.3",
     "spectron": "^15.0.0"
   }
 }

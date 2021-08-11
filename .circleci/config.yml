@@ -32,6 +32,7 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-linux-{{ checksum "yarn.lock" }}
+          key: dependency-cache-linux-
       - run:
           name: Install Dependencies
           command: yarn install
@@ -41,7 +42,9 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: yarn test
+          command: |
+            yarn test
+            yarn run mocha
   windows_test:
     <<: *windows
     steps:
@@ -50,6 +53,7 @@ jobs:
       - *windows_install_yarn
       - restore_cache:
           key: dependency-cache-windows-{{ checksum "yarn.lock" }}
+          key: dependency-cache-windows-
       - run:
           name: Install Dependencies
           command: yarn install
@@ -59,7 +63,9 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: yarn test
+          command: |
+            yarn test
+            yarn run mocha
 
 workflows:
   version: 2
