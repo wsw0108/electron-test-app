@@ -8,5 +8,20 @@
   <body>
     <h1>💖 Hello World!</h1>
     <p>Welcome to your Electron application.</p>
+    <div>
+      <canvas id="test" width="1px" height="1px" style="display: none;"></canvas>
+      <textarea id="output"></textarea>
+    </div>
+    <script>
+     const output = document.getElementById('output');
+     const canvas = document.getElementById('test');
+     const gl = canvas.getContext('webgl');
+     const extensions = gl.getSupportedExtensions();
+     const text = [];
+     for (let ext of extensions) {
+       text.push(ext);
+     }
+     output.innerHTML = text.join('\n');
+    </script>
   </body>
 </html>

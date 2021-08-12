@@ -32,4 +32,10 @@ describe('App Test', function () {
 
     assert.equal(headerText, "💖 Hello World!"); 
   });
+
+  it('Dectect supported webgl extensions', async function () {
+    const output = await this.app.client.$("#output");
+    const text = await output.getText();
+    console.log(text);
+  });
 });
