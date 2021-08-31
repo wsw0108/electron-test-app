@@ -8,6 +8,7 @@
   <body>
     <h1>💖 Hello World!</h1>
     <p>Welcome to your Electron application.</p>
+    <button id="openFile">open file</button>
     <div>
       <canvas id="test" width="1px" height="1px" style="display: none;"></canvas>
       <textarea id="output"></textarea>
@@ -22,6 +23,15 @@
        text.push(ext);
      }
      output.innerHTML = text.join('\n');
+     const { ipcRenderer } = require('electron');
+     const button = document.querySelector('#openFile');
+     button.addEventListener('click', () => {
+       ipcRenderer.invoke('show-open-dialog', {
+         filters: [{extensions: ['png'], name: 'Images'}],
+         //properties: ['openFile'],
+         properties: ['openFile', 'multiSelections'],
+       });
+     });
     </script>
   </body>
 </html>
